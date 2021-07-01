@@ -1,4 +1,5 @@
 using MyWebAPI.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Net;
 
@@ -24,16 +25,17 @@ namespace MyWebAPI.Models
 		}
 		private string[] SetIntermediateIP(string startIP, string endIP)
 		{
+			int byteCapacity = (int)Math.Pow(2, sizeof(byte) * 8);
 			List<string> addresses = new List<string>();
 			string[] start = startIP.Split('.');
 			string[] end = endIP.Split('.');
-			for (int firstOctet = int.Parse(start[0]); firstOctet < 256; firstOctet++)
+			for (int firstOctet = int.Parse(start[0]); firstOctet < byteCapacity; firstOctet++)
 			{
-				for (int secondOctet = int.Parse(start[1]); secondOctet < 256; secondOctet++)
+				for (int secondOctet = int.Parse(start[1]); secondOctet < byteCapacity; secondOctet++)
 				{
-					for (int thirdOctet = int.Parse(start[2]); thirdOctet < 256; thirdOctet++)
+					for (int thirdOctet = int.Parse(start[2]); thirdOctet < byteCapacity; thirdOctet++)
 					{
-						for (int fourthOctet = int.Parse(start[3]); fourthOctet < 256; fourthOctet++)
+						for (int fourthOctet = int.Parse(start[3]); fourthOctet < byteCapacity; fourthOctet++)
 						{
 							string address = firstOctet.ToString() +
 													'.' + secondOctet.ToString() +
